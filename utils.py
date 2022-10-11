@@ -9,6 +9,7 @@ import multiprocessing
 import multiprocessing.sharedctypes as sharedctypes
 import os.path
 import ast
+from pandas.api.types import CategoricalDtype
 
 
 # Number of samples per 30s audio clip.
@@ -209,8 +210,7 @@ def load(filepath):
             tracks[column] = pd.to_datetime(tracks[column])
 
         SUBSETS = ('small', 'medium', 'large')
-        tracks['set', 'subset'] = tracks['set', 'subset'].astype(
-                'category', categories=SUBSETS, ordered=True)
+        tracks['set', 'subset'] = tracks['set', 'subset'].astype(CategoricalDtype(categories=SUBSETS, ordered=True))
 
         COLUMNS = [('track', 'genre_top'), ('track', 'license'),
                    ('album', 'type'), ('album', 'information'),
